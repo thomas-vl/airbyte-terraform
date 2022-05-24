@@ -1,16 +1,18 @@
 locals {
+  #change the these 4 values
   project       = "airbyte-test-1"
-  region        = "europe-west4"
-  location      = "EU"
-  support_email = "thomas@gcompany.nl"
-  domain_name   = "airbyte.vanlatum.dev"
-  airbyte_users = ["thomas@gcompany.nl", "ramon@gcompany.nl"]
+  support_email = "thomas@example.com"
+  domain_name   = "airbyte.example.com"
+  airbyte_users = ["thomas@example.com"]
+
+  region   = "europe-west4"
+  location = "EU"
 }
 
 terraform {
   backend "gcs" {
+    #change this to the correct backend
     bucket = "airbyte-test-332519-state"
-    prefix = "dwh-state-1"
   }
 }
 
