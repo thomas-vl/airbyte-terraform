@@ -1,0 +1,15 @@
+webapp:
+  service:
+    annotations:
+      {
+        cloud.google.com/neg: '{"exposed_ports": {"80":{"name": "neg-airbyte-webapp"}}}',
+        controller.autoneg.dev/neg: '{"backend_services":{"80":[{"name":"airbyte-lb-backend-default","max_rate_per_endpoint":100}]}}',
+      }
+postgresql:
+  enabled: false
+externalDatabase:
+  database: airbyte
+logs:
+  s3:
+    enabled: false
+    bucket: ""
