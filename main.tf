@@ -168,12 +168,13 @@ resource "google_service_account" "airbyte-admin" {
   display_name = "Airbyte Cluster Service Account"
 }
 
-resource "google_project_iam_binding" "airbyte-admin-binding" {
+resource "google_project_iam_member" "airbyte-admin-binding" {
+  depends_on = [
+    helm_release.airbyte
+  ]
   for_each = toset(["roles/container.admin", "roles/iam.serviceAccountUser"])
   role     = each.key
-  members = [
-    "serviceAccount:${google_service_account.airbyte-admin.email}",
-  ]
+  member   = "serviceAccount:${google_service_account.airbyte-admin.email}"
 }
 
 resource "google_service_account_iam_binding" "admin-account-iam" {
