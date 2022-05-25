@@ -1,6 +1,6 @@
 locals {
   #change the these 4 values
-  project       = "airbyte-test-1"
+  project       = "personal-project"
   support_email = "thomas@example.com"
   domain_name   = "airbyte.example.com"
   airbyte_users = ["thomas@example.com"]
@@ -12,7 +12,7 @@ locals {
 terraform {
   backend "gcs" {
     #change this to the correct backend
-    bucket = "airbyte-test-332519-state"
+    bucket = "personal-project-state"
   }
 }
 
