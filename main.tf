@@ -86,27 +86,29 @@ module "services" {
 module "networking" {
   depends_on = [module.services]
 
-  source = "./networking"
+  source  = "./networking"
   project = local.project
 }
 
 module "iam" {
   depends_on = [module.services]
 
-  source = "./iam"
-  project = local.project
-  airbyte_users = local.airbyte_users
+  source           = "./iam"
+  project          = local.project
+  airbyte_users    = local.airbyte_users
+  airbyte_sa_email = module.iam.airbyte_sa.email
+  airbyte_sa_id    = module.iam.airbyte_sa.id
 }
 
 module "cloud_iap" {
-  depends_on = [module.services]
+  depends_on    = [module.services]
   source        = "./cloud_iap"
   project       = local.project
   support_email = local.support_email
 }
 
 module "cloud_sql" {
-  depends_on = [module.services]
+  depends_on        = [module.services]
   source            = "./cloud_sql"
   project           = local.project
   region            = local.region
@@ -116,17 +118,18 @@ module "cloud_sql" {
 
 module "storage" {
   depends_on = [module.services]
-  source   = "./storage"
-  project  = local.project
-  location = local.location
+  source     = "./storage"
+  project    = local.project
+  location   = local.location
 }
 
 module "kubernetes_cluster" {
   depends_on = [module.services]
-  source = "./kubernetes/cluster"
+  source     = "./kubernetes/cluster"
 
-  project   = local.project
+  project            = local.project
   airbyte_network_id = module.networking.airbyte_network_id
+  cluster_name       = "airbyte-cluster"
 }
 
 module "load_balancer" {

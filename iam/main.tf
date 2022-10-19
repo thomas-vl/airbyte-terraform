@@ -11,19 +11,19 @@ resource "google_project_iam_member" "secured_webapp_users" {
 }
 
 resource "google_service_account_iam_binding" "workload_identity_users" {
-  service_account_id = google_service_account.airbyte-admin.id
+  service_account_id = var.airbyte_sa_id
   role               = "roles/iam.workloadIdentityUser"
 
   members = [
-    "serviceAccount:${google_service_account.airbyte-admin.email}"
+    "serviceAccount:${var.airbyte_sa_email}"
   ]
 }
 
 resource "google_service_account_iam_binding" "container_admins" {
-  service_account_id = google_service_account.airbyte-admin.id
+  service_account_id = var.airbyte_sa_id
   role               = "roles/container.admin"
 
   members = [
-    "serviceAccount:${google_service_account.airbyte-admin.email}"
+    "serviceAccount:${var.airbyte_sa_email}"
   ]
 }
