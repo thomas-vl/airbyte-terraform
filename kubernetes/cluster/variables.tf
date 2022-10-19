@@ -1,7 +1,7 @@
-variable "project_id" {
+variable "project" {
   type = string
 }
 
-variable "cluster_name" {
+variable "airbyte_network_id" {
   type = string
 }
