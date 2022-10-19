@@ -10,18 +10,18 @@ resource "google_project_iam_member" "secured_webapp_users" {
   member   = "user:${each.key}"
 }
 
-resource "google_service_account_iam_binding" "workload_identity_users" {
-  service_account_id = var.airbyte_sa_id
-  role               = "roles/iam.workloadIdentityUser"
+resource "google_project_iam_binding" "workload_identity_users" {
+  project = var.project
+  role    = "roles/iam.workloadIdentityUser"
 
   members = [
     "serviceAccount:${var.airbyte_sa_email}"
   ]
 }
 
-resource "google_service_account_iam_binding" "container_admins" {
-  service_account_id = var.airbyte_sa_id
-  role               = "roles/container.admin"
+resource "google_project_iam_binding" "container_admins" {
+  project = var.project
+  role    = "roles/container.admin"
 
   members = [
     "serviceAccount:${var.airbyte_sa_email}"

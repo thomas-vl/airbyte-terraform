@@ -97,7 +97,6 @@ module "iam" {
   project          = local.project
   airbyte_users    = local.airbyte_users
   airbyte_sa_email = module.iam.airbyte_sa.email
-  airbyte_sa_id    = module.iam.airbyte_sa.id
 }
 
 module "cloud_iap" {

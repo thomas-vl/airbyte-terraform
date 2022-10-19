@@ -1,6 +1,6 @@
 
 resource "google_container_cluster" "airbyte_cluster" {
-  name     = "airbyte-cluster"
+  name     = var.cluster_name
   location = "europe-west4"
   network  = var.airbyte_network_id
 
